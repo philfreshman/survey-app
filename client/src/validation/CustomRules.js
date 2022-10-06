@@ -1,7 +1,11 @@
 import Api from "@/plugins/axios";
 
-export function MaxRule(node) {
+export function Max3(node) {
     return node.value.length <= 3;
+}
+
+export function Max6(node) {
+    return node.value.length <= 6;
 }
 
 export async function PreCheckPassword(loginData){
@@ -44,3 +48,4 @@ export function PeselRule(node){
         return false;
     }
 }
+
