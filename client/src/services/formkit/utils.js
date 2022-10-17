@@ -6,22 +6,49 @@ const camel2title = (str) => str
     .trim()
 
 const switchName = (stepName) => {
-    let result = ""
     switch (stepName){
-        case "PersonalData":
-            result = "Personal Data"
-            break;
+        case "Data":
+            return "Data"
         case "CheckBoxes":
-            result = "Options"
-            break;
+            return "Options"
         case "TermsOfUse":
-            result = "Terms of use"
-            break;
+            return "Terms of use"
         default:
-            result = ""
-            break;
+            return ""
     }
-    return result;
 }
 
-export { camel2title, switchName, termsOfUse}
+
+
+// Checks if terms of use are checked
+// Transform object with terms-of-use string to bool
+
+const FormatFormData = (data) => {
+
+    function CheckTerms(data){
+        if(data.TermsOfUse.TermsCheckbox[0]?.length === undefined){
+            return false
+        } else if (data.TermsOfUse.TermsCheckbox[0].length) {
+            return true
+        } else{
+            return false
+        }
+    }
+
+    function FormatTermsToBool(data){
+        const areTermsChecked = CheckTerms(data);
+        if(areTermsChecked){
+            data.TermsOfUse = true
+        } else{
+            data.TermsOfUse = false
+        }
+        return data
+    }
+
+    return FormatTermsToBool(data)
+}
+
+
+
+
+export { camel2title, switchName, termsOfUse, FormatFormData}

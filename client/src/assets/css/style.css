@@ -242,7 +242,12 @@ button:hover, summary { cursor: pointer }
 
 
 ul.formkit-options:nth-child(2) > li:nth-child(1) > label:nth-child(1) > span:nth-child(2){
-    height: 40vh;
+    height: 35vh;
     overflow: auto;
     margin-left: 5px;
+}
+
+pre{
+    height: 30px;
+    width: 100%;
 }

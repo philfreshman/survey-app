@@ -1,5 +1,5 @@
 <script setup>
-  import ResultTable from '../components/ResultTable'
+  import ResultTable from '../components/ResultTable.vue'
 
 </script>
 

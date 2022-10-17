@@ -1,6 +1,6 @@
 <script setup>
-import Api from "@/plugins/axios";
-import { PreCheckPassword } from '@/validation/CustomRules'
+import Api from "../plugins/axios";
+import { PreCheckPassword } from '../validation/CustomRules'
 
 
 const submitLogin = async (loginData, node) => {

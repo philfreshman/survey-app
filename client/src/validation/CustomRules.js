@@ -1,4 +1,4 @@
-import Api from "@/plugins/axios";
+import Api from "../plugins/axios";
 
 export function Max3(node) {
     return node.value.length <= 3;
@@ -48,4 +48,3 @@ export function PeselRule(node){
         return false;
     }
 }
-

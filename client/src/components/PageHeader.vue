@@ -2,11 +2,11 @@
 
   <header>
     <div class="center header-left">
-      <img src="../assets/img/tuchow-logo.jpeg" alt="tuchow-logo"/>
+      <img src="../assets/img/falcon.png" alt="tuchow-logo"/>
     </div>
     <div class="center header-center">
-        <h1>Karta do głosowania</h1>
-        <p>Konsultacje społeczne dotyczące nadania nazw rondom w ciągu drogi wojewódzkiej nr 977 w Tuchowie przy ul. Adama Mickiewicza, Tarnowskiej i Ryglickiej.</p>
+        <h1>Developer survey</h1>
+        <p>Choose your favourite programming languages</p>
     </div>
     <div class="center header-right">
     </div>
@@ -27,10 +27,11 @@
 header{
   height: min-content;
   width: 100%;
-  background-color: #2967B1;
+  background-color: rgba(194, 185, 185, 0.11);
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: black solid 2px;
 }
 
 .logo{
@@ -73,11 +74,11 @@ h1{
   font-size: 1.8em;
   text-align: center;
   margin: 5px;
-  color: white;
+  color: black;
 }
 
 p{
-  color: white;
+  color: black;
   text-align: center;
   font-size: 20px;
   margin: 15px;

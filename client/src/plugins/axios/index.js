@@ -1,3 +1,3 @@
-import Api from "@/plugins/axios/endpoints";
+import Api from "./endpoints.js";
 
 export default Api

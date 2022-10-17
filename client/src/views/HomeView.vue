@@ -1,6 +1,6 @@
 <script>
-  import PageHeader from "../components/PageHeader";
-  import VoteForm from "../components/VoteForm";
+  import PageHeader from "../components/PageHeader.vue";
+  import VoteForm from "../components/VoteForm.vue";
   export default {
     name: "HomeView",
     components: {VoteForm, PageHeader}

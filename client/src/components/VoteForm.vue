@@ -1,21 +1,21 @@
 <script setup>
-import { switchName, termsOfUse } from '@/services/formkit/utils'
-import { Max3, Max6 } from '@/validation/CustomRules'
-import useSteps from '@/services/formkit/useSteps'
-import * as Notify  from "@/plugins/SweetAlert"
-import Api from "@/plugins/axios";
+import { switchName, termsOfUse, FormatFormData } from '../services/formkit/utils.js'
+import { Max3 } from '../validation/CustomRules'
+import useSteps from '../services/formkit/useSteps'
+import * as Notify  from "../plugins/sweetalert.js"
+import Api from "../plugins/axios";
 
 const { steps, visitedSteps, activeStep, setStep, stepPlugin } = useSteps()
 
 const submitApp = async (formData, node) => {
+  formData = FormatFormData(formData)
   let result;
   try {
     result = await Api.PostVote(formData)
-    Notify.ShowPopUp(result.data.statusCode)
-    node.clearErrors()
+    Notify.ShowPopUp(result.status)
   } catch (err) {
-    Notify.ShowPopUp(0)
-    node.setErrors(err.formErrors, err.fieldErrors)
+    Notify.ShowPopUp(null)
+    // node.setErrors(err.formErrors, err.fieldErrors)
   }
 }
 
@@ -59,117 +59,20 @@ const checkStepValidity = (stepName) => {
       </ul>
       <div class="form-body">
 
-
-        <section v-show="activeStep === 'PersonalData'">
-          <FormKit
-              type="group"
-              id="PersonalData"
-              name="PersonalData"
-          >
-            <FormKit
-                type="text"
-                label="First name"
-                name="FirstName"
-                autocomplete="off"
-                value="testName"
-                validation="required|length: 3"
-                :validation-messages="{
-                  required: 'First name required',
-                  length: '3 characters minimum',
-                }"
-                validation-visibility="blur"
-            />
-            <FormKit
-                type="text"
-                label="Last name"
-                name="LastName"
-                autocomplete="off"
-                value="testLastname"
-                validation="required|length: 3"
-                :validation-messages="{
-                  required: 'Last name required',
-                  length: '3 characters minimum',
-                }"
-            />
-            <FormKit
-                type="text"
-                label="Street"
-                name="Street"
-                autocomplete="off"
-                value="testStreet"
-                validation="required|length: 3"
-                :validation-messages="{
-                  required: 'Street required',
-                  length: '3 characters minimum',
-            }"
-            />
-            <FormKit
-                type="text"
-                label="House number"
-                name="HouseNumber"
-                autocomplete="off"
-                value="testHouseNummber"
-                validation="required|length: 1"
-                :validation-messages=" {
-                  required: 'House number required',
-                  length: '1 character minimum',
-            }"
-            />
-            <FormKit
-                type="text"
-                label="Unit number"
-                name="UnitNumber"
-                value="0"
-                autocomplete="off"
-            />
-            <FormKit
-                type="text"
-                name="PostalCode"
-                label="Postal code"
-                autocomplete="off"
-                value="10-823"
-                validation="required|Max6"
-                :validation-rules="{Max6}"
-                :validation-messages="{
-                  required: 'Postal code required',
-                  Max6: '6 characters maximum'
-                }"
-            />
-            <FormKit
-                type="text"
-                label="City"
-                name="City"
-                autocomplete="off"
-                value="Berlin"
-                validation="required|length: 3"
-                :validation-messages="{
-                  required: 'City required',
-                  length: '3 characters minimum',
-                }"
-            />
-
-            <!-- Left // Right -->
-            <div class="step-nav">
-              <FormKit type="button" :disabled="true" v-text="'Back'" />
-              <FormKit type="button" class="next" @click="setStep(1)" v-text="'Next'"/>
-            </div>
-
-          </FormKit>
-        </section>
-
         <section v-show="activeStep === 'CheckBoxes'">
           <FormKit
               id="CheckBoxes"
               type="group"
               name="CheckBoxes"
           >
+
             <FormKit
-                id="Proposals"
+                id="Options"
                 type="checkbox"
                 label="Programming languages"
-                name="Proposals"
+                name="Options"
                 validation="required|Max3"
-                decorator-icon="happy"
+                decorator-icon="heart"
                 :validation-rules="{Max3}"
                 :validation-messages="{
                   required:'At least one checkbox required',
@@ -183,11 +86,11 @@ const checkStepValidity = (stepName) => {
                   },
                   {
                     value: '2',
-                    label: 'JavaScript',
+                    label: 'C#',
                   },
                   {
                     value: '3',
-                    label: 'C#',
+                    label: 'JavaScript',
                   },
                   {
                     value: '4',
@@ -225,6 +128,70 @@ const checkStepValidity = (stepName) => {
                 ]"
             />
 
+            <!-- Back // Next -->
+            <div class="step-nav">
+              <FormKit type="button" :disabled="true" v-text="'Back'" />
+              <FormKit type="button" class="next" @click="setStep(1)" v-text="'Next'"/>
+            </div>
+
+          </FormKit>
+        </section>
+
+        <section v-show="activeStep === 'Data'">
+
+          <FormKit
+              type="group"
+              id="Data"
+              name="Data"
+          >
+
+            <FormKit
+                type="select"
+                label="Position"
+                placeholder="Current position"
+                name="Position"
+                :options="[
+                  'Frontend developer',
+                  'Backend developer',
+                  'Fullstack developer',
+                  'Other',
+                ]"
+                validation="required"
+            />
+
+            <FormKit
+                type="select"
+                label="Experience"
+                placeholder="Years of experience"
+                name="Experience"
+                :options="[
+                  '< 1',
+                  '1 - 2',
+                  '2 - 5',
+                  '5 - 10',
+                  '10 +',
+                ]"
+                validation="required"
+            />
+
+            <FormKit
+                type="url"
+                label="Your website / GitHub"
+                name="Url"
+                placeholder="https://www.github.com/..."
+                validation="url"
+            />
+
+            <FormKit
+                type="textarea"
+                label="Your feedback"
+                name="Feedback"
+                rows="6"
+                placeholder="Things I should add..."
+                help="Hope you liked it!"
+            />
+
+
             <!-- Left // Right -->
             <div class="step-nav">
               <FormKit type="button" @click="setStep(-1)" v-text="'Back'" />
@@ -240,7 +207,6 @@ const checkStepValidity = (stepName) => {
                 type="group"
                 name="TermsOfUse"
             >
-
             <FormKit
                 class="hahaha"
                 id="TermsOfUse"
@@ -249,16 +215,14 @@ const checkStepValidity = (stepName) => {
                 name="TermsCheckbox"
                 :options="[termsOfUse]"
                 validation="required"
-                :validation-messages="{
-                  required: 'Agreement required'
-                }"
-            />
 
+            />
             <!-- Left // Right -->
             <div class="step-nav">
               <FormKit type="button" @click="setStep(-1)" v-text="'Back'" />
               <FormKit type="submit" label="Send" :disabled="!valid" />
             </div>
+
           </FormKit>
         </section>
 
@@ -270,15 +234,16 @@ const checkStepValidity = (stepName) => {
 </template>
 
 <script>
+
 setTimeout(setupCheckBoxes, 1000);
 function setupCheckBoxes() {
   let shouldGoFurther = true;
-  const noNameCheckbox = document.getElementById("Proposals-option-11")
+  const noNameCheckbox = document.getElementById("Options-option-11")
   const proposals = document.querySelectorAll('input[type="checkbox"]')
-  const propArray = Array.from(proposals).slice(0,10)
+  const propArray = Array.from(proposals).slice(0,11)
   
   // unclick array
-  if (noNameCheckbox !== undefined){
+  if (noNameCheckbox !== undefined && noNameCheckbox !== null){
     noNameCheckbox.addEventListener('change', () => {
       if(!shouldGoFurther) return;
       for (let element of propArray) {
@@ -300,7 +265,26 @@ function setupCheckBoxes() {
 }
 
 export default {
-  name: "VoteForm"
+  data () {
+    return {
+      value: 0,
+      city: 'Florence',
+      cities: [
+        'Prague', 'Rome', 'Berlin',
+        'Amsterdam', 'Barcelona', 'London'
+      ]
+    }
+  },
+  methods: {
+    randomCity () {
+      const index = Math.floor(Math.random() * (this.cities.length - 1))
+      if (this.cities[index] !== this.city) {
+        this.city = this.cities[index]
+      } else {
+        this.randomCity()
+      }
+    }
+  }
 }
-</script>
 
+</script>

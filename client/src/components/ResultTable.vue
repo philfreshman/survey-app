@@ -1,5 +1,5 @@
 <script setup>
-import Api from "@/plugins/axios";
+import Api from "../plugins/axios";
 
 class ResultData{
   constructor(json){
