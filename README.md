@@ -15,7 +15,7 @@ That said, you will need to have docker installed on your machine. It can be fou
 
 For each of these sections, the assumption is that you are starting from the base of the repo!
 
-**Start Postgres**
+**Start MySql**
 
 ```sh
 # Run docker-compose to start MySql instance
