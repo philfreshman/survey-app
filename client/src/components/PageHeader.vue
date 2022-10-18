@@ -1,6 +1,10 @@
 <template>
 
   <header>
+    <a href="/login">Login</a>
+    <br>
+    <a href="/register">Register</a>
+    <br>
     <div class="center header-left">
       <img src="../assets/img/falcon.png" alt="tuchow-logo"/>
     </div>

@@ -7,14 +7,16 @@ import (
 )
 
 func SetupRouter(app *gin.Engine) {
-	api := app.Group("/api")
 
 	// Voting
-	api.POST("/makevote", controllers.MakeVote)
+	api := app.Group("/api", middleware.Protected())
+	api.POST("/make-vote", controllers.MakeVote)
 
 	// Authentication
-	auth := api.Group("/auth", middleware.Protected())
-	auth.POST("/precheckpassword", controllers.PrePasswordCheck)
+	auth := app.Group("/auth", middleware.Protected())
+	auth.POST("/register", controllers.Register)
+	auth.POST("/login", controllers.Login)
+	auth.POST("/pre-check-password", controllers.PreCheckPassword)
 	auth.POST("/authenticate", controllers.Authenticate)
 
 	// Results

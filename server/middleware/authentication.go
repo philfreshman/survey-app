@@ -6,6 +6,9 @@ func Protected() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
 		c.Writer.Header().Set("Access-Control-Allow-Headers", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:5173")
+		//c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, OPTIONS, PATCH")
 
 		if c.Request.Method == "OPTIONS" {

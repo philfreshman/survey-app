@@ -29,7 +29,7 @@ func Connect() {
 
 	DB = db
 
-	err = DB.AutoMigrate(&models.VoteData{}, &models.VoteOption{}, &models.VoteLog{})
+	err = DB.AutoMigrate(&models.User{})
 	if err != nil {
 		panic("failed to migrate to database")
 	}

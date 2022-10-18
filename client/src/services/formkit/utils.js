@@ -21,7 +21,7 @@ const switchName = (stepName) => {
 
 
 // Checks if terms of use are checked
-// Transform object with terms-of-use string to bool
+// Transforms object with terms-of-use (type of string) to bool
 
 const FormatFormData = (data) => {
 
