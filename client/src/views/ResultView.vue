@@ -1,12 +1,16 @@
 <script setup>
   import ResultTable from '../components/ResultTable.vue'
+  import PageHeader from "../components/PageHeader.vue";
+
+
+
+
 
 </script>
 
 <template>
-  <Suspense>
-    <ResultTable/>
-  </Suspense>
+  <PageHeader/>
+  <ResultTable/>
 </template>
 
 <script>

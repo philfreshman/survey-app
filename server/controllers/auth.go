@@ -5,6 +5,7 @@ import (
 	"api/database"
 	"api/models"
 	"api/models/dto"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v4"
 	"golang.org/x/crypto/bcrypt"
@@ -61,32 +62,6 @@ func Login(c *gin.Context) {
 	})
 }
 
-func PreCheckPassword(c *gin.Context) {
-	//var loginForm dto.LoginForm
-	//if err := c.BindJSON(&loginForm); err != nil {
-	//	c.JSON(400, gin.H{"status": "data binding failed"})
-	//	return
-	//}
-	//
-	//var user models.User
-	//
-	//database.DB.Where(&models.User{Username: loginForm.Username}).First(&user)
-	//
-	//if user.ID == 0 {
-	//	c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"status": "error", "message": "User not found.", "data": nil})
-	//	return
-	//}
-	//
-	//if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(loginForm.Password)); err != nil {
-	//	c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"status": "error", "error": "Incorrect email and password combination."})
-	//	return
-	//}
-}
-
-func Authenticate(c *gin.Context) {
-
-}
-
 func Register(c *gin.Context) {
 	var registerForm dto.RegisterForm
 	if err := c.BindJSON(&registerForm); err != nil {
@@ -101,4 +76,12 @@ func Register(c *gin.Context) {
 		Password: string(password),
 	}
 	database.DB.Create(&user)
+}
+
+func PreCheckPassword(c *gin.Context) {
+}
+
+func Authenticate(c *gin.Context) {
+	c.SetSameSite(http.SameSiteNoneMode)
+	fmt.Println("test")
 }

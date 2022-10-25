@@ -5,8 +5,10 @@
     <br>
     <a href="/register">Register</a>
     <br>
+    <a href="/results">Results</a>
+    <br>
     <div class="center header-left">
-      <img src="../assets/img/falcon.png" alt="tuchow-logo"/>
+      <a href="/"><img src="../assets/img/falcon.png" alt="tuchow-logo"/></a>
     </div>
     <div class="center header-center">
         <h1>Developer survey</h1>

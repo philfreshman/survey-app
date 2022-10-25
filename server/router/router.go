@@ -14,10 +14,11 @@ func SetupRouter(app *gin.Engine) {
 
 	// Authentication
 	auth := app.Group("/auth", middleware.Protected())
-	auth.POST("/register", controllers.Register)
+	auth.GET("", controllers.Authenticate)
 	auth.POST("/login", controllers.Login)
+	auth.POST("/register", controllers.Register)
 	auth.POST("/pre-check-password", controllers.PreCheckPassword)
-	auth.POST("/authenticate", controllers.Authenticate)
+	//auth.POST("/authenticate", controllers.Authenticate)
 
 	// Results
 	//api.GET("getvoteresults", controllers.GetVoteResults)

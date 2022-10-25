@@ -15,8 +15,8 @@ const submitApp = async (formData, node) => {
     Notify.ShowPopUp(result.status)
   } catch (err) {
     Notify.ShowPopUp(null)
-    // node.setErrors(err.formErrors, err.fieldErrors)
   }
+  setInterval(() => {window.location.replace("/")}, 2600);
 }
 
 
@@ -231,6 +231,7 @@ const checkStepValidity = (stepName) => {
 
 
   </div>
+
 </template>
 
 <script>
@@ -264,27 +265,6 @@ function setupCheckBoxes() {
   }
 }
 
-export default {
-  data () {
-    return {
-      value: 0,
-      city: 'Florence',
-      cities: [
-        'Prague', 'Rome', 'Berlin',
-        'Amsterdam', 'Barcelona', 'London'
-      ]
-    }
-  },
-  methods: {
-    randomCity () {
-      const index = Math.floor(Math.random() * (this.cities.length - 1))
-      if (this.cities[index] !== this.city) {
-        this.city = this.cities[index]
-      } else {
-        this.randomCity()
-      }
-    }
-  }
-}
+
 
 </script>

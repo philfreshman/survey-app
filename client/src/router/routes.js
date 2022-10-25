@@ -1,11 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import Unauthorized from "../views/Unauthorized.vue"
 import RegisterView from '../views/RegisterView.vue'
 import ResultView from '../views/ResultView.vue'
 import LoginView from '../views/LoginView.vue'
-import NotFound from "../views/NotFound.vue";
 import HomeView from '../views/HomeView.vue'
+import NotFound from "../views/NotFound.vue"
+import unauthorized from "../views/Unauthorized.vue";
+import Authenticate from "../services/Authentication.js";
 
-const router = createRouter({
+let router = createRouter({
     history: createWebHistory("./"),
     routes: [
         {
@@ -29,11 +32,31 @@ const router = createRouter({
             component: ResultView
         },
         {
+            path: '/unauthorized',
+            name: 'unauthorized',
+            component: Unauthorized
+        },
+        {
             path: '/:pathMatch(.*)*',
             name: 'not-found',
             component: NotFound
-        }
+        },
+
     ]
 })
 
+router.beforeEach(async (to, from) => {
+    if (to.name !== 'results'){
+        return
+    }
+
+
+    const isAuthenticated = await Authenticate()
+
+    // const isAuthenticated =
+    if (!isAuthenticated) {
+        console.log("user unauthorized")
+        return { name: 'login' }
+    }
+})
 export default router

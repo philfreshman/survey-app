@@ -17,5 +17,19 @@ export default {
     },
     Login(data){
         return Axios().post('/auth/login', data)
+    },
+    // Authenticate(){
+    //     return Axios().get('/auth/hehe', {
+    //         headers:{
+    //             Authorization: `Bearer ${localStorage.getItem("token")}`
+    //         }
+    //     })
+    // },
+    Authenticate(){
+        return Axios().get('/auth',{
+            headers:{
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        })
     }
 }

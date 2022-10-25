@@ -1,21 +1,31 @@
 <script setup>
-import Api from "../plugins/axios";
+// import Api from "../plugins/axios";
+//
+// import {onBeforeMount, onMounted} from "vue";
 
-class ResultData{
-  constructor(json){
-    Object.assign(this,json)
-  }
-}
 
-let results
+// onBeforeMount(async() => {
+//
+//   class ResultData{
+//     constructor(json){
+//       Object.assign(this,json)
+//     }
+//   }
+//
+//   let results
+//
+//   try{
+//     let results = await Api.GetVoteResults();
+//     results = new ResultData(results.data)
+//   }
+//   catch(e){
+//     console.log(e);
+//   }
+// })
 
-try{
-  let result = await Api.GetVoteResults();
-  results = new ResultData(result.data)
-}
-catch(e){
-  console.log(e);
-}
+
+
+
 
 
 
@@ -23,28 +33,30 @@ catch(e){
 </script>
 
 <template>
-  <v-table theme="dark">
-    <thead>
-    <tr>
+
+  <h1>results</h1>
+<!--  <v-table theme="dark">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--&lt;!&ndash;      <th class="text-left">&ndash;&gt;-->
+<!--&lt;!&ndash;        Id&ndash;&gt;-->
+<!--&lt;!&ndash;      </th>&ndash;&gt;-->
 <!--      <th class="text-left">-->
-<!--        Id-->
+<!--        Propozycja-->
 <!--      </th>-->
-      <th class="text-left">
-        Propozycja
-      </th>
-      <th class="text-left">
-        Liczba głosów
-      </th>
-    </tr>
-    </thead>
-    <tbody v-for="item in results" v-bind:key="item.id">
-    <tr>
-<!--      <td>{{item.id}}</td>-->
-      <td>{{item.proposalName}}</td>
-      <td>{{item.count}}</td>
-    </tr>
-    </tbody>
-  </v-table>
+<!--      <th class="text-left">-->
+<!--        Liczba głosów-->
+<!--      </th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody v-for="item in results" v-bind:key="item.id">-->
+<!--    <tr>-->
+<!--&lt;!&ndash;      <td>{{item.id}}</td>&ndash;&gt;-->
+<!--      <td>{{item.proposalName}}</td>-->
+<!--      <td>{{item.count}}</td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--  </v-table>-->
 </template>
 
 
