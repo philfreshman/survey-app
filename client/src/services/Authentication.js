@@ -1,6 +1,5 @@
 import Api from "../plugins/axios";
 
-
 function CheckIfHasToken(){
     return null !== localStorage.getItem("token")
 }
@@ -13,10 +12,6 @@ async function Authenticate(){
     }
 
     const response = await Api.Authenticate()
-
-    console.dir(response)
-
-
 
     return true
 }

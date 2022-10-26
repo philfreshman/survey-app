@@ -22,6 +22,12 @@ let router = createRouter({
             component: LoginView
         },
         {
+            path: '/logout',
+            name: 'logout',
+            component: HomeView,
+            beforeEnter: () => localStorage.removeItem("token")
+        },
+        {
             path: '/register',
             name: 'register',
             component: RegisterView
@@ -45,15 +51,12 @@ let router = createRouter({
     ]
 })
 
-router.beforeEach(async (to, from) => {
+router.beforeEach(async (to) => {
     if (to.name !== 'results'){
         return
     }
 
-
     const isAuthenticated = await Authenticate()
-
-    // const isAuthenticated =
     if (!isAuthenticated) {
         console.log("user unauthorized")
         return { name: 'login' }

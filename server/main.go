@@ -14,5 +14,5 @@ func main() {
 	router.SetupRouter(app)
 	app.Use(router.Custom())
 
-	app.Run(":5000")
+	app.Run(":5050")
 }

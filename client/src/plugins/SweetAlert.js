@@ -23,7 +23,7 @@ export function ShowPopUp(htmlCode) {
             swal.fire({
                 title: "Unknown error",
                 text: "Try again later",
-                timer: 2000,
+                // timer: 2000,
                 icon: "error",
                 showConfirmButton: true
             })

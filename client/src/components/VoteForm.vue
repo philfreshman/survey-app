@@ -4,6 +4,7 @@ import { Max3 } from '../validation/CustomRules'
 import useSteps from '../services/formkit/useSteps'
 import * as Notify  from "../plugins/sweetalert.js"
 import Api from "../plugins/axios";
+import {onMounted} from "vue";
 
 const { steps, visitedSteps, activeStep, setStep, stepPlugin } = useSteps()
 
@@ -28,7 +29,38 @@ const checkStepValidity = (stepName) => {
 
 
 
+onMounted(() => {
+  setTimeout(setupCheckBoxes, 1000);
+  function setupCheckBoxes() {
+    let shouldGoFurther = true;
+    const noNameCheckbox = document.getElementById("Options-option-11")
+    const proposals = document.querySelectorAll('input[type="checkbox"]')
+    const propArray = Array.from(proposals).slice(0,11)
+
+    // unclick array
+    if (noNameCheckbox !== undefined && noNameCheckbox !== null){
+      noNameCheckbox.addEventListener('change', () => {
+        if(!shouldGoFurther) return;
+        for (let element of propArray) {
+          if(element.checked) element.click()
+        }
+      })
+    }
+    // unclick noName
+    if(proposals !== undefined && propArray !== undefined){
+      for (let element of propArray) {
+        element.addEventListener("click", () => {
+          if(!element.checked || !noNameCheckbox.checked) return;
+          shouldGoFurther = false;
+          noNameCheckbox.click();
+          shouldGoFurther = true;
+        })
+      }
+    }
+  }
+})
 </script>
+
 
 <template>
   <div class="form">
@@ -233,38 +265,3 @@ const checkStepValidity = (stepName) => {
   </div>
 
 </template>
-
-<script>
-
-setTimeout(setupCheckBoxes, 1000);
-function setupCheckBoxes() {
-  let shouldGoFurther = true;
-  const noNameCheckbox = document.getElementById("Options-option-11")
-  const proposals = document.querySelectorAll('input[type="checkbox"]')
-  const propArray = Array.from(proposals).slice(0,11)
-  
-  // unclick array
-  if (noNameCheckbox !== undefined && noNameCheckbox !== null){
-    noNameCheckbox.addEventListener('change', () => {
-      if(!shouldGoFurther) return;
-      for (let element of propArray) {
-        if(element.checked) element.click()
-      }
-    })
-  }
-  // unclick noName
-  if(proposals !== undefined && propArray !== undefined){
-    for (let element of propArray) {
-      element.addEventListener("click", () => {
-        if(!element.checked || !noNameCheckbox.checked) return;
-        shouldGoFurther = false;
-        noNameCheckbox.click();
-        shouldGoFurther = true;
-      })
-    }
-  }
-}
-
-
-
-</script>
