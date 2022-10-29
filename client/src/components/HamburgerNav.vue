@@ -1,5 +1,6 @@
 <script setup>
 import {onMounted} from "vue";
+import ToggleButton from "./ToggleButton.vue";
 
 const hasToken = localStorage.getItem("token") === null
 
@@ -24,6 +25,10 @@ onMounted(() => {
       </div>
     </div>
     <ul class="more-button-list">
+
+      <li class="more-button-list-item">
+        <ToggleButton/>
+      </li>
 
       <li v-if="hasToken" class="more-button-list-item">
         <a href="/login">

@@ -4,6 +4,7 @@
 //@use 'utilities/mixins' as mixin;
 
 :root {
+  color-scheme: light dark; /* both supported */
   --gray: #ccccd7;
   --gray-l: #eeeef4;
 }
@@ -23,7 +24,8 @@ body {
   font-size: 16px;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
-  transition: color .5s,background-color .5s;
+  //transition: color .5s,background-color .5s;
+    transition: background 0.2s linear;
 }
 
 

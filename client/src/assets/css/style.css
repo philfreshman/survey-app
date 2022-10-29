@@ -1,30 +1,82 @@
 @charset "UTF-8";
-@font-face {
-  font-family: "Inter";
-  src: url("../src/assets/fonts/inter-Regular.woff") format("woff");
-}
-h1, h2, a, p, li, label, span, button, option, #help-Options {
-  color: #E2E2E2 !important;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+* {
+  box-sizing: border-box;
 }
 
-a:link {
-  text-decoration: none;
+body.dark {
+  background-color: #292c35;
+} /* #9b59b6 */
+body.dark h1, body.dark .support a {
+  color: #fff;
 }
 
-/* visited link */
-a:visited {
-  text-decoration: none;
+.checkbox {
+  opacity: 0;
+  position: absolute;
 }
 
-/* mouse over link */
-a:hover {
-  text-decoration: underline !important;
+.checkbox-label {
+  background-color: #111;
+  width: 55px;
+  height: 26px;
+  border-radius: 50px;
+  position: relative;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* selected link */
-a:active {
-  text-decoration: none;
+.fa-moon {
+  fill: #f1c40f;
+}
+
+.fa-sun {
+  fill: #f39c12;
+}
+
+svg {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  height: 16px;
+}
+
+.checkbox-label .ball {
+  background-color: #E2E2E2;
+  width: 21px;
+  height: 21px;
+  position: absolute;
+  margin: 0;
+  left: 2px;
+  top: 2px;
+  border-radius: 50%;
+  transition: transform 0.2s linear;
+}
+
+.checkbox:checked + .checkbox-label .ball {
+  transform: translateX(29px);
+}
+
+/*  Support me if you like it */
+.support {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+
+.support a {
+  color: #292c35;
+  font-size: 32px;
+  backface-visibility: hidden;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.support a:hover {
+  transform: scale(1.1);
 }
 
 .list-container {
@@ -250,6 +302,34 @@ a:active {
   transform-origin: left;
 }
 
+@font-face {
+  font-family: "Inter";
+  src: url("../src/assets/fonts/inter-Regular.woff") format("woff");
+}
+h1, h2, a, p, li, label, span, button, option, #help-Options {
+  color: #E2E2E2 !important;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+  text-decoration: none;
+}
+
+/* mouse over link */
+a:hover {
+  text-decoration: underline !important;
+}
+
+/* selected link */
+a:active {
+  text-decoration: none;
+}
+
 header {
   z-index: 20 !important;
   min-height: 100px;
@@ -409,15 +489,12 @@ button {
   background: #6C19FF !important;
 }
 
-.step:last-child {
-  box-shadow: grey;
-}
-
 .step:hover {
   cursor: pointer;
 }
 
 [data-step-active=true] {
+  background-color: #3f3f3f;
   border-bottom: none;
   position: relative;
 }
@@ -563,6 +640,7 @@ pre {
 }
 
 :root {
+  color-scheme: light dark; /* both supported */
   --gray: #ccccd7;
   --gray-l: #eeeef4;
 }
@@ -581,7 +659,7 @@ body {
   font-size: 16px;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
-  transition: color 0.5s, background-color 0.5s;
+  transition: background 0.2s linear;
 }
 
 #app {

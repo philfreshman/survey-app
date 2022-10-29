@@ -72,13 +72,11 @@ button{
 }
 
 
-.step:last-child {
-  box-shadow: grey;
-}
 
 .step:hover { cursor: pointer; }
 
 [data-step-active="true"] {
+  background-color: #3f3f3f;
   border-bottom: none;
   position: relative;
 }
