@@ -10,23 +10,19 @@ onMounted(()=>{
   }
 
   const storedTheme = localStorage.getItem('theme')
+  document.documentElement.setAttribute('data-theme', storedTheme)
   if(storedTheme === "dark"){
     toggle.checked = true
   }
 
-  document.documentElement.setAttribute('data-theme', storedTheme)
-
   toggle.onclick = function() {
     const currentTheme = document.documentElement.getAttribute("data-theme");
-    let targetTheme = "light";
-
-    if (currentTheme === "light") {
-      targetTheme = "dark";
-    }
-
+    const targetTheme = currentTheme === "light" ? "dark" : "light"
     document.documentElement.setAttribute('data-theme', targetTheme)
     localStorage.setItem('theme', targetTheme);
   };
+
+
 })
 </script>
 

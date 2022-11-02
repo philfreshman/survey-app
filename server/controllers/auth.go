@@ -23,7 +23,12 @@ func Login(c *gin.Context) {
 
 	var user models.User
 
-	database.DB.Where(&models.User{Username: loginForm.Username}).First(&user)
+	err := database.DB.QueryRow("SELECT * FROM User WHERE Username = ?", loginForm.Username).
+		Scan(&user.ID, &user.Username, &user.Password, &user.CreatedAt, &user.UpdatedAt, &user.DeletedAt)
+
+	if err != nil {
+		return
+	}
 
 	if user.ID == 0 {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"status": "error", "message": "User not found.", "data": nil})
@@ -43,9 +48,9 @@ func Login(c *gin.Context) {
 		ExpiresAt: jwt.NewNumericDate(exp),
 	})
 
-	token, err := claim.SignedString([]byte(config.Config("AUTH_TOKEN_SECRET")))
+	token, error := claim.SignedString([]byte(config.Config("AUTH_TOKEN_SECRET")))
 
-	if err != nil {
+	if error != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Error on register request.", "data": err})
 		return
 	}
@@ -71,14 +76,10 @@ func Register(c *gin.Context) {
 
 	password, _ := bcrypt.GenerateFromPassword([]byte(registerForm.Password), 12)
 
-	var user = models.User{
-		Username: registerForm.Username,
-		Password: string(password),
+	_, err := database.DB.Query("INSERT INTO User Values(?, ?, ?, ?, ?, ?)", nil, registerForm.Username, password, time.Now(), nil, nil)
+	if err != nil {
+		return
 	}
-	database.DB.Create(&user)
-}
-
-func PreCheckPassword(c *gin.Context) {
 }
 
 func Authenticate(c *gin.Context) {

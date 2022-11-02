@@ -17,9 +17,7 @@ func SetupRouter(app *gin.Engine) {
 	auth.GET("", controllers.Authenticate)
 	auth.POST("/login", controllers.Login)
 	auth.POST("/register", controllers.Register)
-	auth.POST("/pre-check-password", controllers.PreCheckPassword)
-	//auth.POST("/authenticate", controllers.Authenticate)
 
 	// Results
-	api.GET("/results", middleware.VerifyJWT(), controllers.GetVoteResults)
+	api.GET("/results", middleware.VerifyJWT(), controllers.GetResults)
 }

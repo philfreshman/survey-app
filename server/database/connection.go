@@ -1,37 +1,26 @@
 package database
 
 import (
-	"api/models"
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
-	"gorm.io/gorm/schema"
-	"strings"
+	"database/sql"
+	_ "github.com/go-sql-driver/mysql"
+	"log"
+	"time"
 )
 
-var DB *gorm.DB
+var DB *sql.DB
 
 func Connect() {
-	// data source name
-	dsn := "admin:pass@tcp(localhost:3306)/SurveyApp?charset=utf8mb4&parseTime=True&loc=Local"
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
-		NamingStrategy: schema.NamingStrategy{
-			SingularTable: true,
-			NoLowerCase:   true,
-			NameReplacer:  strings.NewReplacer("ID", "Id"),
-		},
-		SkipDefaultTransaction: true,
-		FullSaveAssociations:   true,
-	})
+	dsn := "admin:pass@tcp(127.0.0.1:3306)/SurveyApp?charset=utf8mb4&parseTime=True&loc=Local"
 
+	db, err := sql.Open("mysql", dsn)
 	if err != nil {
-		panic("failed to connect to database")
+		log.Fatal(err)
 	}
 
 	DB = db
 
-	err = DB.AutoMigrate(&models.User{})
-	if err != nil {
-		panic("failed to migrate to database")
-	}
+	db.SetConnMaxLifetime(time.Minute * 3)
+	db.SetMaxOpenConns(10)
+	db.SetMaxIdleConns(10)
 
 }

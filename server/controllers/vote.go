@@ -4,17 +4,17 @@ import (
 	"api/database"
 	"api/models"
 	"api/models/dto"
+	"database/sql"
+	"fmt"
 	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
 	"strconv"
 	"time"
 )
 
 func MakeVote(c *gin.Context) {
-
-	c.Writer.Header().Set("Access-Control-Allow-Headers", "*")
-	c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:5173")
-	c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, OPTIONS, PATCH")
+	//c.Writer.Header().Set("Access-Control-Allow-Headers", "*")
+	//c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:5173")
+	//c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, OPTIONS, PATCH")
 
 	var input dto.VoteForm
 	if err := c.BindJSON(&input); err != nil {
@@ -24,78 +24,91 @@ func MakeVote(c *gin.Context) {
 
 	err := runTransaction(input)
 	if err != nil {
-		c.JSON(400, gin.H{"status": "transaction failed"})
-		return
+
 	}
 
 	c.JSON(200, gin.H{"status": "success"})
 }
 
+// Inserts values in VoteData
+// gets list of options
+
 func runTransaction(input dto.VoteForm) error {
-	tx := database.DB.Begin()
+	tx, err := database.DB.Begin()
+	if err != nil {
+		return nil
+	}
 	defer func() {
 		if r := recover(); r != nil {
-			tx.Rollback()
+			_ = tx.Rollback()
 		}
 	}()
 
 	// add voteData
 	var voteDataId int
-	voteDataId, err := createVoteDataAndReturnId(input, tx)
+	voteDataId, err = insertVoteDataAndReturnId(input, tx)
 	if err != nil {
-		return tx.Rollback().Error
+		_ = tx.Rollback()
+		return nil
 	}
 
-	// list of optionId's
-	var optionIds []int
+	// list of checkBoxOptionId's
+	var checkBoxOptions []int
 	for _, optionId := range input.CheckBoxes.Options {
 		id, err := strconv.Atoi(optionId)
 		if err != nil {
-			tx.Rollback()
+			_ = tx.Rollback()
 		}
-		optionIds = append(optionIds, id)
+		checkBoxOptions = append(checkBoxOptions, id)
 	}
 
-	// for each option add voteOption
-	var voteOptionIds []int
-	for _, optionId := range optionIds {
-		id := createVoteOptionAndReturnId(optionId, tx)
-		voteOptionIds = append(voteOptionIds, id)
+	// for each checkBoxOption add voteOption
+	for _, optionId := range checkBoxOptions {
+		incrementVoteOption(optionId, tx)
 	}
 
 	// add voteLog
-	for _, voteOptionId := range voteOptionIds {
-		createVoteLog(voteDataId, voteOptionId, tx)
+	for _, voteOptionId := range checkBoxOptions {
+		insertVoteLog(voteDataId, voteOptionId, tx)
 	}
 
-	return tx.Commit().Error
+	return tx.Commit()
 }
 
-func createVoteDataAndReturnId(input dto.VoteForm, tx *gorm.DB) (int, error) {
+func insertVoteDataAndReturnId(input dto.VoteForm, tx *sql.Tx) (int, error) {
 	var voteData = models.VoteData{
 		Position:   input.Position,
 		Experience: input.Data.Experience,
 		Url:        input.Data.Url,
 		Feedback:   input.Data.Feedback,
 	}
-	tx.Create(&voteData)
 
-	return voteData.ID, nil
-}
+	result, err := tx.Exec("INSERT INTO VoteData VALUES (null, ? , ?, ?, ?)",
+		voteData.Position,
+		voteData.Experience,
+		voteData.Url,
+		voteData.Feedback,
+	)
 
-func createVoteOptionAndReturnId(id int, tx *gorm.DB) int {
-	var voteOption models.VoteOption
-	tx.First(&voteOption, id).Update("Count", voteOption.Count+1)
-	tx.Save(&voteOption)
-
-	return voteOption.ID
-}
-
-func createVoteLog(voteDataId int, voteOptionId int, tx *gorm.DB) {
-	var log = models.VoteLog{
-		VoteOptionId: voteOptionId,
-		VoteDataId:   voteDataId,
-		Time:         time.Now(),
+	if err != nil {
+		return 0, err
 	}
-	tx.Create(&log)
+
+	voteDataId, _ := result.LastInsertId()
+	return int(voteDataId), err
+}
+
+func incrementVoteOption(voteDataId int, tx *sql.Tx) {
+	_, err := tx.Exec("UPDATE VoteOption SET Count = Count +1 WHERE Id = ?", voteDataId)
+	if err != nil {
+		return
+	}
+}
+
+func insertVoteLog(voteDataId int, voteOptionId int, tx *sql.Tx) {
+	result, err := tx.Query("INSERT INTO VoteLog VALUES (?,?,?,?)", 1, voteOptionId, voteDataId, time.Now())
+	if err != nil {
+		return
+	}
+	fmt.Println(result)
 }

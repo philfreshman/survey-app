@@ -12,10 +12,6 @@ onMounted(() => {
 </script>
 
 <template>
-<!--  <a v-if="hasToken" href="/login">Login</a>-->
-<!--  <a v-else href="/logout">Logout</a>-->
-<!--  <a href="/register">Register</a>-->
-<!--  <a href="/results">Results</a>-->
   <div class="list-container">
     <div class="more-button" aria-label="Menu Button">
       <div class="menu-icon-wrapper">

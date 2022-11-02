@@ -8,7 +8,7 @@ import NotFound from "../views/NotFound.vue"
 import unauthorized from "../views/Unauthorized.vue";
 import Authenticate from "../services/Authentication.js";
 
-let router = createRouter({
+const router = createRouter({
     history: createWebHistory("./"),
     routes: [
         {
@@ -62,4 +62,5 @@ router.beforeEach(async (to) => {
         return { name: 'login' }
     }
 })
+
 export default router

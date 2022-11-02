@@ -10,8 +10,9 @@ const app = createApp(App)
 
 
 app.use(plugin, defaultConfig({
-    plugins: [createAutoAnimatePlugin({duration: 200})]
+    plugins: [createAutoAnimatePlugin({duration: 200,easing: "linear"})]
 }))
+
 app.use(router)
 
 app.mount('#app')

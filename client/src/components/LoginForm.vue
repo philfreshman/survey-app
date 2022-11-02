@@ -1,6 +1,5 @@
 <script setup>
 import Api from "../plugins/axios";
-import { PreCheckPassword } from '../validation/CustomRules'
 import * as Notify from "../plugins/sweetalert/sweetalert.js";
 
 
@@ -14,6 +13,7 @@ const submitLogin = async (loginData, node) => {
     setInterval(() => {window.location.assign("/login")}, 2100);
   }
 }
+
 
 </script>
 
