@@ -1,5 +1,5 @@
 <script setup>
-  import ResultTable from '../components/ResultTable.vue'
+  import ResultTable from '../components/ResultChart.vue'
   import PageHeader from "../components/PageHeader.vue";
 
 

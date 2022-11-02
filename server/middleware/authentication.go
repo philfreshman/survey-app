@@ -1,18 +1,41 @@
 package middleware
 
-import "github.com/gin-gonic/gin"
+import (
+	"api/config"
+	"fmt"
+	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt/v4"
+	"net/http"
+)
 
-func Protected() gin.HandlerFunc {
+func VerifyJWT() gin.HandlerFunc {
+
+	type AuthScope struct {
+		UserID int
+	}
+
 	return func(c *gin.Context) {
 
-		c.Writer.Header().Set("Access-Control-Allow-Headers", "*")
-		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:5173")
-		//c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, OPTIONS, PATCH")
+		authHeader := c.GetHeader("Authorization")
 
-		if c.Request.Method == "OPTIONS" {
-			c.IndentedJSON(204, "")
+		if len(authHeader) == 0 {
+			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"status": "failed", "error": "no authorization header present", "data": nil})
+			c.Abort()
+			return
+		}
+
+		tokenString := authHeader[len("Bearer "):]
+
+		_, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+				return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+			}
+			return []byte(config.Config("AUTH_TOKEN_SECRET")), nil
+		})
+
+		if err != nil {
+			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"status": "failed", "error": "jwt token not valid", "data": nil})
+			c.Abort()
 			return
 		}
 

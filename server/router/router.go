@@ -9,11 +9,11 @@ import (
 func SetupRouter(app *gin.Engine) {
 
 	// Voting
-	api := app.Group("/api", middleware.Protected())
+	api := app.Group("/api", middleware.Headers())
 	api.POST("/make-vote", controllers.MakeVote)
 
 	// Authentication
-	auth := app.Group("/auth", middleware.Protected())
+	auth := app.Group("/auth", middleware.Headers())
 	auth.GET("", controllers.Authenticate)
 	auth.POST("/login", controllers.Login)
 	auth.POST("/register", controllers.Register)
@@ -21,5 +21,5 @@ func SetupRouter(app *gin.Engine) {
 	//auth.POST("/authenticate", controllers.Authenticate)
 
 	// Results
-	//api.GET("getvoteresults", controllers.GetVoteResults)
+	api.GET("/results", middleware.VerifyJWT(), controllers.GetVoteResults)
 }

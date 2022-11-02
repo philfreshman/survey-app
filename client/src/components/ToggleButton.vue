@@ -2,10 +2,31 @@
 import {onMounted} from "vue";
 
 onMounted(()=>{
-  const checkbox = document.getElementById("checkbox")
-  checkbox.addEventListener("change", () => {
-    document.body.classList.toggle("dark")
-  })
+  const toggle = document.getElementById("checkbox")
+  const themeExists = localStorage.getItem('theme') !== null
+
+  if(!themeExists){
+    localStorage.setItem('theme', (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"))
+  }
+
+  const storedTheme = localStorage.getItem('theme')
+  if(storedTheme === "dark"){
+    toggle.checked = true
+  }
+
+  document.documentElement.setAttribute('data-theme', storedTheme)
+
+  toggle.onclick = function() {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    let targetTheme = "light";
+
+    if (currentTheme === "light") {
+      targetTheme = "dark";
+    }
+
+    document.documentElement.setAttribute('data-theme', targetTheme)
+    localStorage.setItem('theme', targetTheme);
+  };
 })
 </script>
 
@@ -25,7 +46,3 @@ export default {
   name: "ToggleButton"
 }
 </script>
-
-<style scoped>
-
-</style>

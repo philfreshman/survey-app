@@ -15,7 +15,7 @@
   margin: 30px;
   height: 100%;
   width: 460px;
-  background: #242424;
+  background: var(--fk-background-primary);
   border: 1px solid var(--gray);
   border-radius: 0.5em;
   box-shadow: 0.25em 0.25em 1em 0 rgba(0,0,0,0.1);
@@ -61,7 +61,6 @@ section{
   padding: 16px 20px;
   //background: var(--gray-l);
   border-right: 1px solid var(--gray);
-  //color: gray;
   flex-grow: 0;
   flex-shrink: 0;
   position: relative;
@@ -76,7 +75,7 @@ button{
 .step:hover { cursor: pointer; }
 
 [data-step-active="true"] {
-  background-color: #3f3f3f;
+  background-color: var(--fk-background-secondary);
   border-bottom: none;
   position: relative;
 }
@@ -96,7 +95,7 @@ button{
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  color: white;
+  //color: white;
 }
 
 .step--errors {
@@ -118,7 +117,7 @@ button{
 .next { margin-left: auto;}
 
 .formkit-input{
-  color: white;
+  //color: white;
   padding: 6px !important;
   border: 0 !important;
 }

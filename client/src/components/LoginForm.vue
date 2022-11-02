@@ -1,7 +1,7 @@
 <script setup>
 import Api from "../plugins/axios";
 import { PreCheckPassword } from '../validation/CustomRules'
-import * as Notify from "../plugins/sweetalert.js";
+import * as Notify from "../plugins/sweetalert/sweetalert.js";
 
 
 const submitLogin = async (loginData, node) => {

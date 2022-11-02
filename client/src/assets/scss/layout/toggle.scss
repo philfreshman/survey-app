@@ -2,27 +2,6 @@
 
 * {box-sizing: border-box;}
 
-//body {
-//  font-family: "Montserrat", sans-serif;
-//  background-color: #fff;
-//  display: flex;
-//  justify-content: center;
-//  align-items: center;
-//  flex-direction: column;
-//  text-align: center;
-//  min-height: 100vh;
-//  margin: 0;
-//  transition: background 0.2s linear;
-//}
-
-body.dark {background-color: #292c35;} /* #9b59b6 */
-
-body.dark h1, body.dark .support a {color: #fff;}
-
-
-.toggle{
-  //background-color: red;
-}
 
 .checkbox {
   opacity: 0;
@@ -30,7 +9,7 @@ body.dark h1, body.dark .support a {color: #fff;}
 }
 
 .checkbox-label {
-  background-color: #111;
+  background-color: var(--toggle-bg-color);
   width: 55px;
   height: 26px;
   border-radius: 50px;
@@ -54,24 +33,24 @@ svg{
 }
 
 .checkbox-label .ball {
-  background-color: #E2E2E2;
-  width: 21px;
-  height: 21px;
+  //background-color: #E2E2E2;
+  background-color: var(--toggle-ball-color);
+  width: 22px;
+  height: 22px;
   position: absolute;
   margin: 0;
   left: 2px;
   top: 2px;
   border-radius: 50%;
+  //border: green solid 3px;
   transition: transform 0.2s linear;
 }
 
 .checkbox:checked + .checkbox-label .ball {
-  transform: translateX(29px);
+  transform: translateX(28px);
 }
 
 
-
-/*  Support me if you like it */
 .support {
   position: absolute;
   right: 20px;
@@ -79,7 +58,6 @@ svg{
 }
 
 .support a {
-  color: #292c35;
   font-size: 32px;
   backface-visibility: hidden;
   display: inline-block;
@@ -88,4 +66,9 @@ svg{
 
 .support a:hover{
   transform: scale(1.1);
+}
+
+.toggle{
+  border-radius: 55px;
+  border: var(--toggle-border);
 }

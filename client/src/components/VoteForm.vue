@@ -2,7 +2,7 @@
 import { switchName, termsOfUse, FormatFormData } from '../services/formkit/utils.js'
 import { Max3 } from '../validation/CustomRules'
 import useSteps from '../services/formkit/useSteps'
-import * as Notify  from "../plugins/sweetalert.js"
+import * as Notify  from "../plugins/sweetalert/sweetalert.js"
 import Api from "../plugins/axios";
 import {onMounted} from "vue";
 
@@ -17,7 +17,7 @@ const submitApp = async (formData, node) => {
   } catch (err) {
     Notify.ShowPopUp(null)
   }
-  setInterval(() => {window.location.replace("/")}, 2600);
+  // setInterval(() => {window.location.replace("/")}, 2600);
 }
 
 
@@ -203,8 +203,8 @@ onMounted(() => {
                   '5 - 10',
                   '10 +',
                 ]"
-                validation="required"
             />
+<!--            validation="required"-->
 
             <FormKit
                 type="url"
@@ -246,10 +246,12 @@ onMounted(() => {
                 label="Terms of use"
                 name="TermsCheckbox"
                 :options="[termsOfUse]"
-                validation="required"
 
             />
-            <!-- Left // Right -->
+<!--              validation="required"-->
+
+
+              <!-- Left // Right -->
             <div class="step-nav">
               <FormKit type="button" @click="setStep(-1)" v-text="'Back'" />
               <FormKit type="submit" label="Send" :disabled="!valid" />

@@ -1,6 +1,6 @@
 <script setup>
 import Api from "../plugins/axios";
-import * as Notify from "../plugins/sweetalert.js";
+import * as Notify from "../plugins/sweetalert/sweetalert.js";
 
 
 const submitRegister = async (registerData, node) => {
