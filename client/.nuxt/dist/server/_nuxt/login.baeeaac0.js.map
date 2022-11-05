@@ -1,0 +1,1 @@
+{"version":3,"file":"login.baeeaac0.js","sources":["../../../../pages/login.vue"],"sourcesContent":["<template>\n<h1>Login</h1>\n</template>\n\n<script>\nexport default {\n  name: \"login\"\n}\n</script>\n\n<style scoped>\n\n</style>"],"names":["_sfc_main","_openBlock","_createElementBlock"],"mappings":"oHAKA,MAAKA,EAAU,CACb,KAAM,OACR,0BANA,OAAAC,EAAA,EAAAC,EAAc,UAAV,OAAK"}

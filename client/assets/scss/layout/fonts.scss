@@ -1,0 +1,38 @@
+@use '../utilities/variables' as mixin;
+
+
+@font-face {
+    font-family: 'Inter';
+    //noinspection CssUnknownTarget
+    src:  url('https://cdnjs.cloudflare.com/ajax/libs/inter-ui/3.13.1/Inter (web hinted latin)/Inter-Regular.woff') format('woff')
+    //src:  url('../public/Inter-Regular.woff') format('woff')
+}
+
+
+h1, h2, a, p, li, label, span, button, option, #help-Options, div
+{
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+    text-decoration: none;
+}
+
+/* mouse over link */
+a:hover {
+    text-decoration: underline !important;
+}
+
+/* selected link */
+a:active {
+    text-decoration: none;
+}
+
+span{
+    color: var(--text-color)
+}
