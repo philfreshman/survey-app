@@ -5,7 +5,7 @@ export default {
         return Axios().post('api/make-vote', data)
     },
     GetVoteResults() {
-        return Axios().get('api/getvoteresults')
+        return Axios().get('api/results')
     },
     CheckPassword(data: any){
         const formData = new FormData();

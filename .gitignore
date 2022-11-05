@@ -391,3 +391,4 @@ pnpm-debug.log*
 
 
 /tmp
+/.nuxt

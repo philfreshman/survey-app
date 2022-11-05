@@ -6,15 +6,11 @@ import * as Notify from "../plugins/sweetalert/sweetalert.ts";
 const submitRegister = async (registerData, node) => {
   try{
     const response = await Api.Register(registerData)
-
-    // 234 ms
-
-    // window.location.assign("/login");
+    window.location.assign("/surveyapp/login");
   } catch (error){
-    Notify.ShowPopUp(null)
-    setInterval(() => {window.location.assign("/register")}, 2100);
+    Notify.ShowPopUp(0)
+    setInterval(() => {window.location.assign("/surveyapp/register")}, 2100);
   }
-
 }
 
 
