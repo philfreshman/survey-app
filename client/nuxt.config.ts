@@ -23,5 +23,8 @@ export default defineNuxtConfig({
     nitro: {
         serveStatic: false
     },
-    modules: ['@formkit/nuxt']
+    modules: ['@formkit/nuxt'],
+    build: {
+        transpile: [/echarts/],
+    },
 })
