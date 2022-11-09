@@ -9,12 +9,15 @@ import (
 
 var DB *sql.DB
 
-func Connect() {
-	dsn := "admin:pass@tcp(127.0.0.1:3306)/SurveyApp?charset=utf8mb4&parseTime=True&loc=Local"
+const (
+	dbDriver = "mysql"
+	dbSource = "admin:pass@tcp(127.0.0.1:3306)/SurveyApp?charset=utf8mb4&parseTime=True&loc=Local"
+)
 
-	db, err := sql.Open("mysql", dsn)
+func Connect() {
+	db, err := sql.Open("mysql", dbSource)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Cannot connect do db", err)
 	}
 
 	DB = db

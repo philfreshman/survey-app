@@ -8,7 +8,7 @@ import (
 )
 
 func Config(key string) string {
-	err := godotenv.Load("./config/jwt.env")
+	err := godotenv.Load("../app.env")
 	if err != nil {
 		fmt.Println("Error loading jwt.env file")
 	}

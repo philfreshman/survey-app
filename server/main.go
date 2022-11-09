@@ -1,9 +1,9 @@
 package main
 
 import (
-	"api/database"
-	"api/router"
 	"github.com/gin-gonic/gin"
+	"server/database"
+	"server/router"
 )
 
 func main() {

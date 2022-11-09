@@ -1,12 +1,12 @@
-package controllers
+package api
 
 import (
-	"api/database"
-	"api/models"
-	"api/models/dto"
 	"database/sql"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"server/database"
+	"server/models"
+	"server/models/dto"
 	"strconv"
 	"time"
 )

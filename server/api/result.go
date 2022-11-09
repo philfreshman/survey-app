@@ -1,9 +1,9 @@
-package controllers
+package api
 
 import (
-	"api/database"
-	"api/models/dto"
 	"github.com/gin-gonic/gin"
+	"server/database"
+	"server/models/dto"
 )
 
 func GetResults(c *gin.Context) {

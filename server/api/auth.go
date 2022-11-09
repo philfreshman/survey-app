@@ -1,15 +1,15 @@
-package controllers
+package api
 
 import (
-	"api/config"
-	"api/database"
-	"api/models"
-	"api/models/dto"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v4"
-	"golang.org/x/crypto/bcrypt"
 	"net/http"
+	"server/config"
+	"server/database"
+	"server/models"
+	"server/models/dto"
+	"server/util"
 	"strconv"
 	"time"
 )
@@ -35,7 +35,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(loginForm.Password)); err != nil {
+	if err := util.CheckPassword(user.Password, loginForm.Password); err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"status": "error", "error": "Incorrect email and password combination."})
 		return
 	}
@@ -74,7 +74,7 @@ func Register(c *gin.Context) {
 		return
 	}
 
-	password, _ := bcrypt.GenerateFromPassword([]byte(registerForm.Password), 12)
+	password, _ := util.HashPassword(registerForm.Password)
 
 	_, err := database.DB.Query("INSERT INTO User Values(?, ?, ?, ?, ?, ?)", nil, registerForm.Username, password, time.Now(), nil, nil)
 	if err != nil {

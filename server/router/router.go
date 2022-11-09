@@ -1,23 +1,21 @@
 package router
 
 import (
-	"api/controllers"
-	"api/middleware"
 	"github.com/gin-gonic/gin"
+	"server/api"
+	"server/middleware"
 )
 
+// SetupRouter defines endpoint-routes
 func SetupRouter(app *gin.Engine) {
-
 	// Voting
-	api := app.Group("/api", middleware.Headers())
-	api.POST("/make-vote", controllers.MakeVote)
+	vote := app.Group("/api", middleware.Headers())
+	vote.POST("/make-vote", api.MakeVote)
+	vote.GET("/results", middleware.VerifyJWT(), api.GetResults)
 
 	// Authentication
 	auth := app.Group("/auth", middleware.Headers())
-	auth.GET("", controllers.Authenticate)
-	auth.POST("/login", controllers.Login)
-	auth.POST("/register", controllers.Register)
-
-	// Results
-	api.GET("/results", middleware.VerifyJWT(), controllers.GetResults)
+	auth.GET("", api.Authenticate)
+	auth.POST("/login", api.Login)
+	auth.POST("/register", api.Register)
 }
