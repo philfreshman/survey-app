@@ -1,6 +1,9 @@
 # Survey App
 
-A [Go](https://go.dev/) + [Vue.js](https://vuejs.org/) developer survey application 📋
+A [Go](https://go.dev/) + [Vue](https://vuejs.org/) developer survey application 📋
+
+<img src="https://philfreshman.com/img/survey.png" height=40% alt="screenshot" />
+
 
 ## Getting Started
 
@@ -36,7 +39,7 @@ air
 
 **Start the client**
 
-[Vue](https://vuejs.org/) with [Vite](https://vitejs.dev/)⚡️ for frontend development and tooling.
+[Nuxt3](https://nuxt.com/) ⚡️ for frontend development and tooling.
 
 ```sh
 # Move into the client directory
