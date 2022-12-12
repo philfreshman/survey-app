@@ -5,9 +5,11 @@ import * as Notify from "../tools/sweetalert";
 
 const submitLogin = async (loginData, node) => {
   try{
-    const response = await Api.Login(loginData)
-    localStorage.setItem("token", response.data.token);
-    window.location.assign("/results");
+    // no api request for demo purpose
+    // const response = await Api.Login(loginData)
+    // localStorage.setItem("token", response.data.token);
+    localStorage.setItem("token", "demo");
+    await navigateTo('/results')
   } catch (error){
     Notify.ShowPopUp(null)
     setInterval(() => {window.location.assign("/login")}, 2100);
@@ -35,6 +37,7 @@ const submitLogin = async (loginData, node) => {
               type="text"
               name="username"
               label="Username"
+              value="admin"
               validation="required"
               :validation-messages="{
                   required: 'Username required',
@@ -44,6 +47,7 @@ const submitLogin = async (loginData, node) => {
               type="password"
               name="password"
               label="Password"
+              value="pass"
               validation="required"
               validation-visibility="dirty"
           />

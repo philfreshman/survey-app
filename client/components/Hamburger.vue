@@ -2,7 +2,11 @@
 import ToggleButton from "./ToggleButton.vue";
 import {onMounted} from "vue";
 
-const hasToken = localStorage.getItem("token") === null
+const hasToken = localStorage.getItem("token") !== null
+
+function deleteToken(){
+  localStorage.removeItem("token")
+}
 
 onMounted( () => {
   document.querySelector('.more-button').addEventListener('click', function () {
@@ -27,18 +31,18 @@ onMounted( () => {
       </li>
 
       <li v-if="hasToken" class="more-button-list-item">
+        <a href="/surveyapp" @click="deleteToken">
+          <img src="../assets/img/logout.png" alt="logout" style="width:20px; height:auto;" />
+          <span>Logout</span>
+        </a>
+      </li>
+      <li v-else class="more-button-list-item">
         <a href="/surveyapp/login">
           <img src="../assets/img/login.png" alt="login" style="width:20px; height:auto;"/>
           <span>Login</span>
         </a>
       </li>
-      <li v-else class="more-button-list-item">
-        <a href="/surveyapp/logout">
-          <img src="../assets/img/logout.png" alt="logout" style="width:20px; height:auto;" />
-          <span>Logout</span>
-        </a>
-      </li>
-      <li v-if="hasToken" class="more-button-list-item">
+      <li v-if="!hasToken" class="more-button-list-item">
         <a href="/surveyapp/register">
           <img src="../assets/img/register.png" alt="register" style="width:20px; height:auto;" />
           <span>Register</span>

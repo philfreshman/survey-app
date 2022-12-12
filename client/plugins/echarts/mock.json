@@ -1,0 +1,46 @@
+[
+  {
+    "value": 33,
+    "name": "Go"
+  },
+  {
+    "value": 28,
+    "name": "C#"
+  },
+  {
+    "value": 25,
+    "name": "JavaScript"
+  },
+  {
+    "value": 24,
+    "name": "Phyton"
+  },
+  {
+    "value": 20,
+    "name": "Java"
+  },
+  {
+    "value": 19,
+    "name": "Rust"
+  },
+  {
+    "value": 17,
+    "name": "Kotlin"
+  },
+  {
+    "value": 14,
+    "name": "PHP"
+  },
+  {
+    "value": 13,
+    "name": "TypeScript"
+  },
+  {
+    "value": 10,
+    "name": "C / C++"
+  },
+  {
+    "value": 3,
+    "name": "None"
+  }
+]

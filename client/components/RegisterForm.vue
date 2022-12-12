@@ -5,7 +5,8 @@ import * as Notify from "../tools/sweetalert";
 
 const submitRegister = async (registerData, node) => {
   try{
-    const response = await Api.Register(registerData)
+    // no api request for demo purpose
+    // const response = await Api.Register(registerData)
     window.location.assign("/surveyapp/login");
   } catch (error){
     Notify.ShowPopUp(0)

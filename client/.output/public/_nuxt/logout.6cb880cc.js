@@ -1,0 +1,1 @@
+import{_ as e}from"./Navbar.57693955.js";import{z as t,i as n,j as a,F as s,l as c,o as r}from"./entry.cc34745d.js";const _={name:"logout"},l=c("h1",null,"Logout",-1);function p(m,u,d,f,i,g){const o=e;return r(),n(s,null,[a(o),l],64)}const h=t(_,[["render",p]]);export{h as default};
