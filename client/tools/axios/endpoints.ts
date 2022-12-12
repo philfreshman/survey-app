@@ -24,6 +24,9 @@ export default {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             }
         })
+    },
+    Test(){
+        return Axios().get('api/artist/')
     }
 }
 

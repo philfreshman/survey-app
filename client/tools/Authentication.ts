@@ -1,4 +1,4 @@
-import Api from "../plugins/axios";
+import Api from "./axios";
 
 function CheckIfHasToken(){
     return null !== localStorage.getItem("token")

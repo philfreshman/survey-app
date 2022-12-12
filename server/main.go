@@ -12,7 +12,7 @@ func main() {
 	app := gin.Default()
 
 	router.SetupRouter(app)
-	app.Use(router.Custom())
+	app.Use(router.Cors())
 
 	app.Run(":5050")
 }

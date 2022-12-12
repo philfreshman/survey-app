@@ -19,10 +19,8 @@ const switchName = (stepName: string) => {
 }
 
 
-
 // Checks if terms of use are checked
 // Transforms object with terms-of-use (type of string) to bool
-
 const FormatFormData = (data: any) => {
     function CheckTerms(data: any){
         if(data.TermsOfUse.TermsCheckbox[0]?.length === undefined){
@@ -46,8 +44,5 @@ const FormatFormData = (data: any) => {
 
     return FormatTermsToBool(data)
 }
-
-
-
 
 export { camel2title, switchName, termsOfUse, FormatFormData}

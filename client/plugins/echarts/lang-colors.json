@@ -1,24 +1,15 @@
 {
   "C Sharp": "#178600",
   "C": "#555555",
-
-
   "Go": "#375eab",
   "HTML": "#e44b23",
-
   "Java": "#b07219",
   "JavaScript": "#f1e05a",
-
   "Kotlin": "#F18E33",
-
   "PHP": "#4F5D95",
-
   "Python": "#3572A5",
-
   "Ruby": "#701516",
   "Rust": "#dea584",
-
   "Scala": "#DC322F",
-
   "TypeScript": "#2b7489"
 }

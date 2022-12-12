@@ -1,6 +1,3 @@
-<script setup>
-</script>
-
 <template>
   <header>
     <div class="box header-left">
@@ -22,5 +19,3 @@
     name: "Navbar"
   }
 </script>
-
-

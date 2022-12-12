@@ -11,7 +11,7 @@ var DB *sql.DB
 
 const (
 	dbDriver = "mysql"
-	dbSource = "admin:pass@tcp(127.0.0.1:3306)/SurveyApp?charset=utf8mb4&parseTime=True&loc=Local"
+	dbSource = "admin:pass@tcp(127.0.0.1:3307)/SurveyApp?charset=utf8mb4&parseTime=True&loc=Local"
 )
 
 func Connect() {

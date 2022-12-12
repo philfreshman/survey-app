@@ -1,24 +1,23 @@
 <script setup>
-import {TitleComponent, TooltipComponent, LegendComponent,} from 'echarts/components';
+import { TitleComponent, TooltipComponent, LegendComponent , ToolboxComponent} from 'echarts/components';
+import * as Notify from "../tools/sweetalert";
 import { CanvasRenderer } from 'echarts/renderers';
-import config2 from "../plugins/echarts/config2";
+import config from "../plugins/echarts/config";
+import { onBeforeMount,  ref } from 'vue';
 import { PieChart } from 'echarts/charts';
 import { use } from 'echarts/core';
 import VChart from 'vue-echarts';
-import {onBeforeMount,  ref} from 'vue';
-import Api from "../plugins/axios";
-import * as Notify from "../plugins/sweetalert/sweetalert";
+import Api from "../tools/axios";
 
-
-let newData = ref();
+let resultData = ref();
 
 onBeforeMount(async () => {
   try {
     const response = await Api.GetVoteResults()
-    config2.series[0].data = response.data.sort(function (a, b) {
+    config.series[0].data = response.data.sort(function (a, b) {
       return b.value - a.value;
     });
-    newData.value = config2;
+    resultData.value = config;
     // window.location.assign("/surveyapp/login");
   } catch (error) {
     Notify.ShowPopUp(0)
@@ -29,16 +28,13 @@ onBeforeMount(async () => {
   }
 })
 
-
-// const setups = newData
-
-
 use([
   CanvasRenderer,
   PieChart,
   TitleComponent,
   TooltipComponent,
   LegendComponent,
+  ToolboxComponent
 ]);
 
 </script>
@@ -46,6 +42,6 @@ use([
 
 <template>
   <client-only>
-    <v-chart autoresize :option="newData" />
+    <v-chart autoresize :option="resultData" />
   </client-only>
 </template>

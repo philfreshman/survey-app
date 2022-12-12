@@ -1,6 +1,6 @@
 <script setup>
-import Api from "../plugins/axios";
-import * as Notify from "../plugins/sweetalert/sweetalert.ts";
+import Api from "../tools/axios";
+import * as Notify from "../tools/sweetalert";
 
 
 const submitLogin = async (loginData, node) => {

@@ -4,7 +4,7 @@ import {onMounted} from "vue";
 
 const hasToken = localStorage.getItem("token") === null
 
-onMounted(() => {
+onMounted( () => {
   document.querySelector('.more-button').addEventListener('click', function () {
     document.querySelector('.list-container').classList.toggle('active');
   });

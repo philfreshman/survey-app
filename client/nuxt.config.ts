@@ -15,9 +15,9 @@ export default defineNuxtConfig({
                 { name: 'viewport', content: 'width=device-width, initial-scale=1' },
             ],
         },
-
     },
 
+    // css: ["@/assets/scss/main.scss", "@/tools/sweetalert/swal-dark.css", "@/tools/sweetalert/swal-light.css"],
     css: ["@/assets/scss/main.scss"],
     ssr: false,
     nitro: {

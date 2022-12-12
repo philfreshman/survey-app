@@ -1,33 +1,26 @@
 <script setup>
-import { switchName, termsOfUse, FormatFormData } from '../plugins/formkit/utils.ts'
-import { Max3 } from '../tools/CustomRules.ts'
+import { switchName, termsOfUse, FormatFormData } from '~/plugins/formkit/utils'
 import useSteps from '../plugins/formkit/useSteps'
-import * as Notify  from "../plugins/sweetalert/sweetalert.ts"
-import Api from "../plugins/axios";
-import {onMounted} from "vue";
+import Api from "../tools/axios";
+import {ShowPopUp} from "../tools/sweetalert";
 
 const { steps, visitedSteps, activeStep, setStep, stepPlugin } = useSteps()
 
 const submitApp = async (formData, node) => {
   formData = FormatFormData(formData)
-  let result;
   try {
-    result = await Api.PostVote(formData)
-    Notify.ShowPopUp(result.status)
+    const result = await Api.PostVote(formData)
+    ShowPopUp(result.status)
   } catch (err) {
-    Notify.ShowPopUp(null)
+    ShowPopUp(200)
   }
-  // setInterval(() => {window.location.replace("/")}, 2600);
 }
-
 
 const checkStepValidity = (stepName) => {
   return (steps[stepName].errorCount > 0
       || steps[stepName].blockingCount > 0)
       && visitedSteps.value.includes(stepName)
 }
-
-
 
 onMounted(() => {
   setTimeout(setupCheckBoxes, 1000);
@@ -59,6 +52,7 @@ onMounted(() => {
     }
   }
 })
+
 </script>
 
 
@@ -103,12 +97,11 @@ onMounted(() => {
                 type="checkbox"
                 label="Programming languages"
                 name="Options"
-                validation="required|Max3"
+                validation="required|max:3"
                 decorator-icon="heart"
-                :validation-rules="{Max3}"
                 :validation-messages="{
                   required:'At least one checkbox required',
-                  Max3: 'Maximum 3 choices'
+                  max: 'Maximum 3 choices'
                 }"
                 help="Maximum 3 choices"
                 :options="[
@@ -196,6 +189,7 @@ onMounted(() => {
                 label="Experience"
                 placeholder="Years of experience"
                 name="Experience"
+                validation="required"
                 :options="[
                   '< 1',
                   '1 - 2',
@@ -204,7 +198,6 @@ onMounted(() => {
                   '10 +',
                 ]"
             />
-<!--            validation="required"-->
 
             <FormKit
                 type="url"
@@ -240,18 +233,16 @@ onMounted(() => {
                 name="TermsOfUse"
             >
             <FormKit
-                class="hahaha"
                 id="TermsOfUse"
                 type="checkbox"
                 label="Terms of use"
                 name="TermsCheckbox"
+                validation="required"
                 :options="[termsOfUse]"
 
             />
-<!--              validation="required"-->
 
-
-              <!-- Left // Right -->
+            <!-- Left // Right -->
             <div class="step-nav">
               <FormKit type="button" @click="setStep(-1)" v-text="'Back'" />
               <FormKit type="submit" label="Send" :disabled="!valid" />
@@ -262,7 +253,6 @@ onMounted(() => {
 
       </div>
     </FormKit>
-
 
   </div>
 
