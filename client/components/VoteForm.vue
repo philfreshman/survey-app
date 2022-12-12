@@ -9,10 +9,11 @@ const { steps, visitedSteps, activeStep, setStep, stepPlugin } = useSteps()
 const submitApp = async (formData, node) => {
   formData = FormatFormData(formData)
   try {
-    const result = await Api.PostVote(formData)
-    ShowPopUp(result.status)
-  } catch (err) {
+    // no api request for demo purpose
+    // const result = await Api.PostVote(formData)
     ShowPopUp(200)
+  } catch (err) {
+    // ShowPopUp(0)
   }
 }
 
@@ -172,7 +173,7 @@ onMounted(() => {
 
             <FormKit
                 type="select"
-                label="Position"
+                label="*Position"
                 placeholder="Current position"
                 name="Position"
                 :options="[
@@ -186,7 +187,7 @@ onMounted(() => {
 
             <FormKit
                 type="select"
-                label="Experience"
+                label="*Experience"
                 placeholder="Years of experience"
                 name="Experience"
                 validation="required"
