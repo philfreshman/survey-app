@@ -7,7 +7,7 @@ const submitLogin = async (loginData, node) => {
   try{
     const response = await Api.Login(loginData)
     localStorage.setItem("token", response.data.token);
-    window.location.assign("/results");
+    window.location.assign("/surveyapp/results");
   } catch (error){
     Notify.ShowPopUp(null)
     setInterval(() => {window.location.assign("/login")}, 2100);

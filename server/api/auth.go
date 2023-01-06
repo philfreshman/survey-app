@@ -48,9 +48,9 @@ func Login(c *gin.Context) {
 		ExpiresAt: jwt.NewNumericDate(exp),
 	})
 
-	token, error := claim.SignedString([]byte(config.Config("AUTH_TOKEN_SECRET")))
+	token, err := claim.SignedString([]byte(config.Config("AUTH_TOKEN_SECRET")))
 
-	if error != nil {
+	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"status": "error", "message": "Error on register request.", "data": err})
 		return
 	}
