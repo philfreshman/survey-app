@@ -14,12 +14,18 @@
     "@formkit/addons": "^1.0.0-beta.12",
     "@formkit/nuxt": "^1.0.0-beta.12",
     "axios": "^1.2.1",
-    "cypress": "^12.3.0",
     "echarts": "^5.4.1",
     "sass": "^1.56.2",
     "sweetalert2": "^11.4.8",
     "vue": "^3.2.45",
     "vue-chartjs": "^5.0.1",
-    "vue-echarts": "^6.2.4"
+    "vue-echarts": "^6.2.4",
+
+    "@badeball/cypress-cucumber-preprocessor": "latest",
+    "@cypress/webpack-preprocessor": "latest",
+    "cypress": "latest",
+    "ts-loader": "latest",
+    "typescript": "latest",
+    "webpack": "latest"
   }
 }
